@@ -6,25 +6,25 @@ def load_data(file_path):
 
 animals_data = load_data("animals_data.json")
 
-def generate_animal_html(animal):
-    """Generates HTML string for a single animal."""
-    html_str = f"""
+def serialize_animal(animal_obj):
+    """Serializes a single animal object into HTML."""
+    output = f"""
     <li class="cards__item">
-        <div class="card__title">{animal['name']}</div>
+        <div class="card__title">{animal_obj['name']}</div>
         <p class="card__text">
-            <strong>Diet:</strong> {animal['characteristics'].get('diet')}<br/> 
-            <strong>Location:</strong> {', '.join(animal['locations'])}<br/> 
-            <strong>Type:</strong> {animal['characteristics'].get('type')}<br/>
+            <strong>Diet:</strong> {animal_obj['characteristics'].get('diet')}<br/>
+            <strong>Location:</strong> {', '.join(animal_obj['locations'])}<br/>
+            <strong>Type:</strong> {animal_obj['characteristics'].get('type')}<br/>
         </p>
     </li>
     """
-    return html_str
+    return output
 
 def generate_html_content(animals):
     """Generates the complete HTML string for all animals."""
     html_list = ""
     for animal in animals:
-        html_list += generate_animal_html(animal)
+        html_list += serialize_animal(animal)
     return html_list
 
 def main():
